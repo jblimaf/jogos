@@ -1,67 +1,30 @@
-const board = document.getElementById('board');
-const cells = document.querySelectorAll('.cell');
-const status = document.getElementById('status');
-
-let currentPlayer = 'X';
-let gameBoard = ['', '', '', '', '', '', '', '', ''];
-let gameActive = true;
-
-function makeMove(cellIndex) {
-    if (gameBoard[cellIndex] === '' && gameActive) {
-        gameBoard[cellIndex] = currentPlayer;
-        cells[cellIndex].textContent = currentPlayer;
-        cells[cellIndex].classList.add(currentPlayer);
-        
-        if (checkWin()) {
-            status.textContent = `Jogador ${currentPlayer} ganhou!`;
-            gameActive = false;
-        } else if (checkDraw()) {
-            status.textContent = 'Empate!';
-            gameActive = false;
-        } else {
-            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-            status.textContent = `É a vez do jogador ${currentPlayer}`;
-        }
-    }
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
 }
 
-function checkWin() {
-    const winningCombinations = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8],
-        [0, 3, 6], [1, 4, 7], [2, 5, 8],
-        [0, 4, 8], [2, 4, 6]
-    ];
-
-    for (const combo of winningCombinations) {
-        const [a, b, c] = combo;
-        if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
-            return true;
-        }
-    }
-
-    return false;
+h1 {
+    font-size: 24px;
 }
 
-function checkDraw() {
-    return !gameBoard.includes('');
+p {
+    font-size: 18px;
 }
 
-function resetBoard() {
-    gameBoard = ['', '', '', '', '', '', '', '', ''];
-    cells.forEach(cell => {
-        cell.textContent = '';
-        cell.classList.remove('X', 'O');
-    });
-    currentPlayer = 'X';
-    status.textContent = '';
-    gameActive = true;
+input {
+    font-size: 18px;
+    padding: 5px;
 }
 
-board.addEventListener('click', function (e) {
-    if (e.target.classList.contains('cell')) {
-        const cellIndex = Array.from(cells).indexOf(e.target);
-        makeMove(cellIndex);
-    }
-});
+button {
+    font-size: 18px;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
 
-status.textContent = `É a vez do jogador ${currentPlayer}`;
+button:hover {
+    background-color: #45a049;
+}
