@@ -1,21 +1,13 @@
-const secretNumber = Math.floor(Math.random() * 100) + 1;
-let attempts = 0;
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
 
-const guessInput = document.getElementById('guess');
-const checkButton = document.getElementById('check');
-const message = document.getElementById('message');
+h1 {
+    font-size: 24px;
+}
 
-checkButton.addEventListener('click', function () {
-    const userGuess = parseInt(guessInput.value);
-    attempts++;
-
-    if (userGuess === secretNumber) {
-        message.textContent = `Parabéns! Você acertou o número ${secretNumber} em ${attempts} tentativas.`;
-        checkButton.disabled = true;
-        guessInput.disabled = true;
-    } else if (userGuess < secretNumber) {
-        message.textContent = 'Tente um número maior.';
-    } else {
-        message.textContent = 'Tente um número menor.';
-    }
-});
+canvas {
+    border: 1px solid #000;
+    margin: 20px auto;
+}
